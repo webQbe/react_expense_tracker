@@ -19,11 +19,31 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
     // Use useReducer hook for state management with the AppReducer function
     const [ state, dispatch ] = useReducer(AppReducer, initialState);
+        /* State Management
+            state: Holds the current global state.
+            dispatch: A function used to send actions to the reducer (AppReducer).
+            AppReducer: The function that processes the actions and updates the state.
+        */
+
+    // Actions
+    function deleteTransaction(id){
+        // Send action to the reducer
+        dispatch({
+            // Creates an action object
+            type: 'DELETE_TRANSACTION', 
+            /* A string identifier for the action (DELETE_TRANSACTION) */
+            payload: id 
+            /* The data required to perform the action (in this case, the id of the transaction to delete). */
+        })
+    }
 
     return(<GlobalContext.Provider value={{
-        transactions: state.transactions
+        /* Pass transactions state and deleteTransaction function as values */
+        transactions: state.transactions,
+        deleteTransaction
+        /* Enable child components to consume the context and use these values */
     }}>
-            {children}
+            {children} 
         </GlobalContext.Provider>);
 } 
 
