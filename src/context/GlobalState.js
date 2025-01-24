@@ -26,6 +26,7 @@ export const GlobalProvider = ({ children }) => {
         */
 
     // Actions
+
     function deleteTransaction(id){
         // Send action to the reducer
         dispatch({
@@ -34,15 +35,25 @@ export const GlobalProvider = ({ children }) => {
             /* A string identifier for the action (DELETE_TRANSACTION) */
             payload: id 
             /* The data required to perform the action (in this case, the id of the transaction to delete). */
-        })
+        });
+    }
+
+    function addTransaction(transaction){
+        dispatch({
+            type: 'ADD_TRANSACTION',
+            payload: transaction 
+            /* Dispatches an action of type 'ADD_TRANSACTION' with the transaction object as the payload */
+        });
     }
 
     return(<GlobalContext.Provider value={{
-        /* Pass transactions state and deleteTransaction function as values */
-        transactions: state.transactions,
-        deleteTransaction
-        /* Enable child components to consume the context and use these values */
-    }}>
+            /* Pass transactions state and functions as values */
+            transactions: state.transactions, 
+                deleteTransaction, // For deleting
+                addTransaction // For adding
+
+            /* Enable child components to consume the context and use these values */
+        }}>
             {children} 
         </GlobalContext.Provider>);
 } 
