@@ -1,15 +1,9 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
-// Define the initial global state with a list of transactions
+// Define the initial global state
 const initialState = {
-    transactions: [
-        { id: 1, text: 'Flower', amount: -20 },
-        { id: 2, text: 'Salary', amount: 300 },
-        { id: 3, text: 'Book', amount: -10 },
-        { id: 4, text: 'Camera', amount: 150 }
-    ]
-    /* Negative numbers are expenses, Positive numbers are incomes */
+    transactions: []
 }
 
 // Create context object to share state across components.
